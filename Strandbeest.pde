@@ -1,13 +1,12 @@
 // A Strandbeest
-//Should the golden Ratios be a there own subclass or a HashMap like a library?
-//Golden Ratios should just be called genes or DNA maybe just a list
+//Should the "Holy Numbers" be a there own subclass or a HashMap like a library?
 /*Shortcuts
 Run: Ctrl + R
 
 */
 
 class Strandbeest {
-  // gene or the golden ratios
+  // gene or the "holy numbers"
   // ToDo: gene[12] = 150 is m the crank and should not mutate or evolve 
   int[] gene = {380, 415, 393, 401, 558, 394, 367, 657, 490, 500, 619, 78, 150};
   // rna are the resulting intersecting points
@@ -24,12 +23,7 @@ class Strandbeest {
   }
   
   void grow(){
-    // Replace with when done
-    //rna[0] = new PVector(0, 0);
-    for (int i=0; i < rna.length; i++) {
-      rna[i] = new PVector(0, 0);
-    }
-    
+    rna[0] = new PVector(0, 0);
     rna[1] = PVector.sub(rna[0], new PVector(gene[0], 0));
     rna[2] = PVector.add(rna[0], new PVector(gene[0], 0));
     rna[3] = PVector.sub(rna[0], new PVector(0, gene[11]));
