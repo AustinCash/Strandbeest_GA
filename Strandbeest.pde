@@ -1,5 +1,4 @@
 // A Strandbeest
-//Should the "Holy Numbers" be a there own subclass or a HashMap like a library?
 /*Shortcuts
 Run: Ctrl + R
 
@@ -7,7 +6,7 @@ Run: Ctrl + R
 
 class Strandbeest {
   // gene or the "holy numbers"
-  // ToDo: gene[12] = 150 is m the crank and should not mutate or evolve 
+  // Note: gene[12] = 150 is m the crank and should not mutate or evolve 
   int[] gene = {380, 415, 393, 401, 558, 394, 367, 657, 490, 500, 619, 78, 150};
   // rna are the resulting intersecting points
   PVector[] rna = new PVector[15];
@@ -48,13 +47,6 @@ class Strandbeest {
     scale(0.3);  // fit to workspace
     stroke(0);
     
-    footprint.add(rna[13]);
-    
-    fill (255, 0, 0);
-    for (int i=0; i < footprint.size(); i++) {
-      ellipse(footprint.get(i).x, footprint.get(i).y, 10, 10);
-    }
-    
     line(rna[0].x, rna[0].y, rna[1].x, rna[1].y);  // L frame a
     line(rna[0].x, rna[0].y, rna[2].x, rna[2].y);  // R frame a
     line(rna[0].x, rna[0].y, rna[3].x, rna[3].y);  // center frame l
@@ -89,19 +81,20 @@ class Strandbeest {
       ellipse(rna[i].x, rna[i].y, 10, 10);
     }
     
-    
-    //print("j:", PVector.sub(rna[5], rna[4]).mag());
-    //println(" b:", PVector.sub(rna[5], rna[1]).mag());
-    //println(rna[4]);
+    track();
+
+    //println(footprint.size());
     //println(theta);
   }
   
   void track() {
     footprint.add(rna[13]);
-    
+    if (footprint.size() > 200) {
+      footprint.remove(0);
+    }
     fill (255, 0, 0);
     for (int i=0; i < footprint.size(); i++) {
-      ellipse(footprint.get(i).x, footprint.get(i).y, 20, 20);
+      ellipse(footprint.get(i).x, footprint.get(i).y, 10, 10);
     }
   }
   
@@ -117,17 +110,4 @@ class Strandbeest {
     d.add(a);
     return d;
   }
-  /* 
-  PVector intersect(PVector a, PVector b, int ar, int br, boolean up) {
-    PVector c = PVector.sub(a, b);
-    float cr = c.mag();
-    // Law of cos
-    float a_ang = acos((pow(br, 2) + pow(cr, 2) - pow(ar, 2)) / (2 * br * cr));
-    // if up == true, not c + a
-    PVector d = PVector.fromAngle(c.heading() - a_ang);
-    d.setMag(ar); 
-    d.add(b);
-    return d;
-  }
-  */
 }
